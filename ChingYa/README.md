@@ -1,0 +1,5 @@
+HELLO~
+q
+exit
+
+:wq
