@@ -14,3 +14,8 @@
   * [Compilation Process in C language](https://www.tutorialandexample.com/compilation-process-in-c-language/)
 * 11/20
   * [Processes](https://notes.shichao.io/tlpi/ch6/)
+
+## Textbook
+
+* [Fundamentals of Data Structures in C](https://www.amazon.com/Fundamentals-Data-Structures-Ellis-Horowitz/dp/0929306406)
+* [Introduction to Algorithms, 3rd Edition](https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844)
