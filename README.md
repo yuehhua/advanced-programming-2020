@@ -12,6 +12,8 @@
   * [機器學習模型圖書館：從傳統模型到深度學習](https://ithelp.ithome.com.tw/users/20103529/ironman/1732)
 * 11/6
   * [Compilation Process in C language](https://www.tutorialandexample.com/compilation-process-in-c-language/)
+  * [如何在 VS code 上設定 Julia](https://yuehhua.github.io/2020/10/31/vscode-with-julia/)
+  * [JuliaLangTW/practices.jl](https://github.com/JuliaLangTW/practices.jl)
 * 11/20
   * [Processes](https://notes.shichao.io/tlpi/ch6/)
 
@@ -19,3 +21,8 @@
 
 * [Fundamentals of Data Structures in C](https://www.amazon.com/Fundamentals-Data-Structures-Ellis-Horowitz/dp/0929306406)
 * [Introduction to Algorithms, 3rd Edition](https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844)
+
+## Awesome repository
+
+* [foldfelis/DataStructure101](https://github.com/foldfelis/DataStructure101)
+* [foldfelis/Algorithm101](https://github.com/foldfelis/Algorithm101)
