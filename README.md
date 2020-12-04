@@ -16,6 +16,8 @@
   * [JuliaLangTW/practices.jl](https://github.com/JuliaLangTW/practices.jl)
 * 11/20
   * [Processes](https://notes.shichao.io/tlpi/ch6/)
+* 12/11
+  * [軟體工程師為什麼要學 Design Pattern? | 物件導向 | SOLID | 工程師 Nic](https://www.youtube.com/watch?v=pkm5jQfnKGs)
 
 ## Textbook
 
