@@ -1,57 +1,81 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import numpy as np
-from collections import defaultdict
+import random
 
-tour_map = list()
-record_map = list()
-start = [3,3]
+class Knight_tour():
 
+    def __init__(self, size, record_map):
+        self.size = size
+        self.record_map = record_map
+        
+    def step_options(self, knight):
+        dirs = [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]]
+        options = [[knight[0]+i[0], knight[1]+i[1]] for i in dirs]
+        i = 0
+        while i != len(options):
+            if options[i][0] > (self.size-1) or options[i][0] < 0 or options[i][1] > (self.size-1) or options[i][1] < 0:
+                del options[i]
+            else:
+                i += 1       
+        return [step for step in options if Knight_tour.visitable(self, step)]
 
-def step_options(position):
-    options = list()
-    for i in range(2):
-        for j in range(2):
-            for k in range(2):
-                if i == 0:
-                    elements = [1,2]
-                else:
-                    elements = [2,1]
-                if j == 0 and k == 0:
-                    options.append([position[0]+elements[0],position[1]+elements[1]])
-                elif j == 0 and k == 1:
-                    options.append([position[0]+elements[0],position[1]-elements[1]])
-                elif j == 1 and k == 0:
-                    options.append([position[0]-elements[0],position[1]+elements[1]])
-                elif j == 1 and k == 1:
-                    options.append([position[0]-elements[0],position[1]-elements[1]])
+    def visitable(self, knight):
+        return knight[0] > -1 and knight[0] < self.size and knight[1] > -1 and knight[1] < self.size and not knight in self.record_map
+
+    def next_step(self, options):
+        NextTwoStepOptions = [Knight_tour.step_options(self, knight) for knight in options]
+        min_index = 0
+        index_list = [0]
+
+        for i in range(1,len(options)):
+            if len(NextTwoStepOptions[min_index]) > len(NextTwoStepOptions[i]):
+                min_index = i
+                index_list = list()
+                index_list.append(min_index)
+            elif len(NextTwoStepOptions[min_index]) == len(NextTwoStepOptions[i]):
+                index_list.append(i)
+            else:
+                pass
+        return options[random.choice(index_list)]
     
-    clone = options.copy()
-    for i in range(len(clone)):
-        if clone[i][0] > 8 or clone[i][0] < 0 or clone[i][1] > 8 or clone[i][1] < 0:
-            options.remove(clone[i])
-    return options
+    def main(self, knight):
+        self.record_map.append(knight)
+        for i in range(1, self.size**2):
+            options = Knight_tour.step_options(self, knight)
+            if len(options) == 0:
+                break
+            if len(options) == 1:
+                knight = options[0]
+            else:
+                knight = Knight_tour.next_step(self, options)
+            self.record_map.append(knight)
+        return self.record_map
 
-record_map.append(start)
-options = step_options(start)
-n = 0
+for i in range(8):
+    for j in range(8):
+        tour  = Knight_tour(8, list())
+        route = tour.main([i,j])
+        print('start from', [i,j])
+        print(route)
 
-while len(record_map) != 64:  
-    if n != 1:
-        record_map.append(options[n])
-    next_step = step_options(options[n])
-    for j in step_options(options[n]):
-        if j in record_map:
-            next_step.remove(j)
-    if len(next_step) != 0:
-        options = next_step.copy()
-        n = 0
-    else:
-        record_map.remove(options[n])
-        options = step_options(record_map[-1])
-        n += 1
-print(record_map)
+
+
+
+
+    
+
+    
+    
+
+
+
+
+
+            
+    
+
+
 
 
         
