@@ -4,11 +4,7 @@ import random
 # 8 steps
 next_step = [(2,1), (1,2), (2,-1), (1,-2), (-2,1), (-1,2), (-2,-1), (-1,-2)]
 
-
-
-
 class KnightTour:
-
     def __init__(self, size):
         self.size = size
         self.chessboard = np.zeros((self.size, self.size))
@@ -36,18 +32,15 @@ class KnightTour:
         return next_pos
 
     # find all steps
-    def travel(self, init_x, init_y):
-        counter = 1
-        self.chessboard[init_x][init_y] = counter
-        result = True
+    def travel(self):
+        x, y = self.initiate_pos()
+        self.chessboard[x][y] = 1
         
         total_steps = self.size**2
-        for i in range(total_steps):
-            pos = self.move(init_x, init_y)
+        for counter in range(2, total_steps+1):
+            pos = self.move(x, y)
             if len(pos) == 0:
-                result = False
-                break
-            
+                return False
             else :
                 first_step = pos[0]
                 
@@ -56,29 +49,19 @@ class KnightTour:
                     if len(self.move(j[0], j[1])) <= len(self.move(first_step[0], first_step[1])):
                         first_step = j
                 
-                init_x = first_step[0]
-                init_y = first_step[1]
-                counter += 1
-                self.chessboard[init_x][init_y] = counter
-                
-        return result
+                x, y = first_step
+                self.chessboard[x][y] = counter
+        return True
 
 if __name__ == '__main__':
 
-    # chessboard size
     board_size = int(input("Please enter the n of the n*n chessboard :"))
-
     test = KnightTour(board_size)
+    result = test.travel()
 
-    # initional position
-    x, y = test.initiate_pos()
-    result = test.travel(x, y)
-
-    # find all steps
     while not result:
         test = KnightTour(board_size)
-        x, y = test.initiate_pos()
-        result = test.travel(x, y)
+        result = test.travel()
 
     print('Success!')
     print('Pathway :')
