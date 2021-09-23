@@ -4,19 +4,17 @@ import random
 # 8 steps
 next_step = [(2,1), (1,2), (2,-1), (1,-2), (-2,1), (-1,2), (-2,-1), (-1,-2)]
 
-# chessboard size
-board_size = int(input("Please enter the n of the n*n chessboard :"))
 
 
-class Knight_tour:
+
+class KnightTour:
 
     def __init__(self, size):
         self.size = size
         self.chessboard = np.zeros((self.size, self.size))
-        self.result = False
 
     # randon initional position
-    def initiate_site(self):
+    def initiate_pos(self):
         return (random.randint(0,self.size -1), random.randint(0,self.size -1))
 
     # check the history that it is a avalivable step which is never visiting.
@@ -41,12 +39,13 @@ class Knight_tour:
     def travel(self, init_x, init_y):
         counter = 1
         self.chessboard[init_x][init_y] = counter
+        result = True
         
         total_steps = self.size**2
         for i in range(total_steps):
             pos = self.move(init_x, init_y)
             if len(pos) == 0:
-                self.fail = True
+                result = False
                 break
             
             else :
@@ -61,20 +60,26 @@ class Knight_tour:
                 init_y = first_step[1]
                 counter += 1
                 self.chessboard[init_x][init_y] = counter
+                
+        return result
 
 if __name__ == '__main__':
 
-    test = Knight_tour(board_size)
+    # chessboard size
+    board_size = int(input("Please enter the n of the n*n chessboard :"))
+
+    test = KnightTour(board_size)
 
     # initional position
-    x, y = test.initiate_site()
-    print('initial position :', (x , y))
-    
+    x, y = test.initiate_pos()
+    result = test.travel(x, y)
+
     # find all steps
-    test.travel(x, y)
-    if test.result:
-        print('Can\'t travel, please change another initial position!')
-    else:
-        print('Success!')
-        print('Pathway :')
-        print(test.chessboard)
+    while not result:
+        test = KnightTour(board_size)
+        x, y = test.initiate_pos()
+        result = test.travel(x, y)
+
+    print('Success!')
+    print('Pathway :')
+    print(test.chessboard)
